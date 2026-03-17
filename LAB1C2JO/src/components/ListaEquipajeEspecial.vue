@@ -187,54 +187,264 @@ export default {
 </template>
 
 <style scoped>
-    .modulo {
-        font-family: Arial, sans-serif;
-        color: #333;
-    }
+.modulo {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #1e293b;
+}
+
+.modulo h2 {
+    margin-bottom: 24px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #0f172a;
+    text-align: center;
+}
+
+.paneles {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+@media (max-width: 900px) {
     .paneles {
-        display: flex;
-        gap: 20px;
-        align-items: flex-start;
+        flex-direction: column;
     }
-    @media (max-width: 800px) {
-        .paneles { flex-direction: column; }
-    }
-    .panel-formulario {
-        flex: 1;
-        background: #f9f9f9;
-        padding: 20px;
-        border-radius: 8px;
-        border: 1px solid #ddd;
-    }
-    .panel-tabla {
-        flex: 2;
-    }
-    .campo { margin-bottom: 15px; }
-    label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px;}
-    input, select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;}
-    .btn-registrar { width: 100%; background: #0056b3; color: white; padding: 10px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;}
-    .btn-registrar:hover { background: #004494; }
-    
-    .encabezado-tabla { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;}
-    .buscador { width: 250px; }
-    
-    table { width: 100%; border-collapse: collapse; background: white;}
-    th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
-    th { background-color: #f1f1f1; }
-    .tarifa { color: #28a745; font-weight: bold; }
-    .mensaje-vacio { color: #777; font-style: italic; }
+}
 
-    /* ESTILOS DINÁMICOS DE ESTADO */
-    .badge { padding: 5px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; color: white;}
-    .badge-mostrador { background-color: #ffc107; color: #333; }
-    .badge-bodega { background-color: #17a2b8; }
-    .badge-cargado { background-color: #28a745; }
+.panel-formulario,
+.panel-tabla {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 14px 40px rgba(15, 23, 42, 0.08);
+}
 
-    .acciones { display: flex; gap: 5px; }
-    .btn-estado { background: #6c757d; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;}
-    .btn-eliminar { background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;}
-    
-    .errores { background: #f8d7da; color: #721c24; padding: 15px; border-radius: 4px; margin-top: 15px; }
-    .errores h4 { margin: 0 0 10px 0; }
-    .errores ul { margin: 0; padding-left: 20px; }
+.panel-formulario {
+    flex: 1;
+    padding: 24px;
+}
+
+.panel-tabla {
+    flex: 2;
+    padding: 22px;
+    overflow-x: auto;
+}
+
+.panel-formulario h3,
+.panel-tabla h3 {
+    margin-bottom: 18px;
+    font-size: 20px;
+    color: #0f172a;
+    font-weight: 700;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.campo {
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #334155;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    box-sizing: border-box;
+    background: #f8fafc;
+    color: #0f172a;
+    font-size: 14px;
+    transition: all 0.25s ease;
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    border-color: #2563eb;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.btn-registrar {
+    width: 100%;
+    background: linear-gradient(135deg, #1d4ed8, #2563eb);
+    color: white;
+    padding: 13px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    transition: transform 0.2s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+    box-shadow: 0 10px 22px rgba(37, 99, 235, 0.28);
+}
+
+.btn-registrar:hover {
+    transform: translateY(-1px);
+    opacity: 0.95;
+}
+
+.encabezado-tabla {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.buscador {
+    width: 260px;
+    max-width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 14px;
+    background: white;
+}
+
+th,
+td {
+    padding: 14px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: middle;
+}
+
+th {
+    background: #eff6ff;
+    color: #1e3a8a;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+tbody tr {
+    transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+    background: #f8fafc;
+}
+
+td strong {
+    color: #0f172a;
+}
+
+td small {
+    color: #64748b;
+    font-size: 12px;
+}
+
+.tarifa {
+    color: #16a34a;
+    font-weight: 700;
+}
+
+.mensaje-vacio {
+    color: #64748b;
+    font-style: italic;
+    background: #f8fafc;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px dashed #cbd5e1;
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 7px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+
+.badge-mostrador {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.badge-bodega {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.badge-cargado {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.acciones {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-estado,
+.btn-eliminar {
+    border: none;
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-estado {
+    background: #334155;
+    color: white;
+}
+
+.btn-estado:hover {
+    transform: translateY(-1px);
+    opacity: 0.92;
+}
+
+.btn-eliminar {
+    background: #dc2626;
+    color: white;
+}
+
+.btn-eliminar:hover {
+    transform: translateY(-1px);
+    opacity: 0.92;
+}
+
+.errores {
+    background: #fef2f2;
+    color: #991b1b;
+    padding: 16px;
+    border-radius: 14px;
+    margin-top: 18px;
+    border: 1px solid #fecaca;
+}
+
+.errores h4 {
+    margin: 0 0 10px 0;
+    font-size: 15px;
+}
+
+.errores ul {
+    margin: 0;
+    padding-left: 20px;
+}
 </style>
