@@ -1,3 +1,16 @@
+<script setup>
+import ListaEquipajeEspecial from './components/ListaEquipajeEspecial.vue'
+</script>
+
+<template>
+  <header>
+    <h1>Módulo de Operaciones del Aeropuerto JJ</h1>
+  </header>
+  <main>
+    <ListaEquipajeEspecial />
+  </main>
+</template>
+
 <style scoped>
 header {
   line-height: 1.5;
