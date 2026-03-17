@@ -1,11 +1,24 @@
-<script setup></script>
+<script setup>
+import ListaEquipajeEspecial from './components/ListaEquipajeEspecial.vue'
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <header>
+    <h1>Módulo de Operaciones del Aeropuerto JJ</h1>
+  </header>
+  <main>
+    <ListaEquipajeEspecial />
+  </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+header {
+  line-height: 1.5;
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+}
+main {
+  padding: 20px;
+}
+</style>
